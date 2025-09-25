@@ -4,4 +4,19 @@ class ItemsController < ApplicationController
 
     render({ :template => "item_templates/list" })
   end
+
+  def show_backdoor
+    render({ :template => "item_templates/backdoor" })
+  end
+
+  def add_item
+    item = Item.new
+
+    item.link_url = params.fetch("query_link_url")
+    item.link_description = params.fetch("query_link_description")
+    item.thumbnail_url = params.fetch("query_thumbnail_url")
+    item.save
+
+    redirect_to("/")
+  end
 end
